@@ -1,0 +1,20 @@
+/*
+	Theme Name: A.Predelin By Ketchup
+	Theme URI: http://inketchup.com
+	Description: Дизайн сайта ведущему Андрею Пределину, разработанный студией Кетчуп.
+	Version: 0.2.3b
+	Author: Столпник Даниил
+	Tags: Кетчуп, Пределин, Ведущий
+
+	License: MIT
+	License URI: http://opensource.org/licenses/mit-license.php
+*/
+
+/*------------------------------------*\
+    MAIN
+\*------------------------------------*/
+
+/* global box-sizing */
+
+@import url(https://fonts.googleapis.com/css?family=Exo+2:400,500,600,700,800,300,200&subset=latin,cyrillic);
+/*font-family: 'Exo 2', sans-serif;*/

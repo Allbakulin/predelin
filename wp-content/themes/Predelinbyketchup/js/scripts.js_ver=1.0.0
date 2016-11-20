@@ -1,0 +1,232 @@
+(function ($, root, undefined) {
+	
+	$(function () {
+		
+		'use strict';
+		
+        baguetteBox.run('.gallery');
+        
+        $("#toggle").click(function() {
+            $(this).toggleClass("on");
+            $("#nav-wrapper").toggleClass("turn-off");
+            $("#footer-wrapper").removeClass("on-footer");
+        });
+
+        $("#toogle-footer").click(function() {
+            $("#footer-wrapper").toggleClass("on-footer");
+            $("#nav-wrapper").removeClass("turn-off");
+            $("#toggle").removeClass("on");
+        });
+        
+        $(document).ready(function() {
+ 
+            $("#owl-demo").owlCarousel({
+ 
+              navigation : false, // Show next and prev buttons
+              slideSpeed : 300,
+              paginationSpeed : 400,
+              singleItem:true,
+              autoPlay : 3500
+
+              // "singleItem:true" is a shortcut for:
+              // items : 1, 
+              // itemsDesktop : false,
+              // itemsDesktopSmall : false,
+              // itemsTablet: false,
+              // itemsMobile : false
+
+          });
+            
+            $("#owl-demo-2").owlCarousel({
+ 
+              navigation : false, // Show next and prev buttons
+              slideSpeed : 300,
+              paginationSpeed : 400,
+              singleItem:true,
+
+              // "singleItem:true" is a shortcut for:
+              // items : 1, 
+              // itemsDesktop : false,
+              // itemsDesktopSmall : false,
+              // itemsTablet: false,
+              // itemsMobile : false
+
+          });
+            
+            $("#owl-demo-3").owlCarousel({
+ 
+              navigation : false, // Show next and prev buttons
+              slideSpeed : 300,
+              paginationSpeed : 400,
+              singleItem:true,
+
+              // "singleItem:true" is a shortcut for:
+              // items : 1, 
+              // itemsDesktop : false,
+              // itemsDesktopSmall : false,
+              // itemsTablet: false,
+              // itemsMobile : false
+
+          });
+
+        });
+        
+        $(document).ready(function() {
+            $('#fullpage').fullpage({
+                navigation: true,
+                navigationTooltips: ['Андрей Пределин', 'Обо мне', 'Видео', 'Напишите мне', 'Фотоглалерея', 'Отзывы', 'Благотворительность', 'Блог', 'Контакты'],
+                loopBottom: false,
+                loopTop: false,
+                scrollingSpeed: 700,
+                autoScrolling: false,
+                anchors:['mainHeader', 'aboutMe', 'video', 'CallMe', 'photo', 'testimonials', 'charity', 'blog', 'contacts'],
+                continuousVertical: true,
+                fitToSectionDelay: 600,
+                fitToSection: false,
+            });
+        });
+        
+       var sDegreeFirts = 0;
+        var sDegreeSecond = 0;
+        var sDegreeThird = 0;
+        var sDegreeForth = 0;
+       var parallaxHead = 0;
+        
+        $(document).ready(function() { // Ждём загрузки страницы
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 0) {
+                    angleFirst();
+                }
+                if ($(this).scrollTop() > 3700 ) {
+                    angleSecond();
+                    angleThird();
+                }
+                if ($(this).scrollTop() > 4800 ) {
+                    angleForth();
+                }
+            });
+        });
+        
+        
+        function angleFirst() {
+            if (sDegreeFirts <= 3) {
+                sDegreeFirts += 0.05;
+                var sRotateFirst = "skewY(" + sDegreeFirts + "deg)";
+                $("#first-angle").css({"transform" : sRotateFirst, "-webkit-transform" : sRotateFirst});
+            }
+        }
+        
+        function angleSecond() {
+            if (sDegreeSecond <= 3) {
+                sDegreeSecond += 0.05;
+                var sRotateSecond = "skewY(" + sDegreeSecond + "deg)";
+                $("#second-angle").css({"transform" : sRotateSecond, "-webkit-transform" : sRotateSecond});
+            }
+        }
+        
+        function angleThird() {
+            if (sDegreeThird <= 3) {
+                sDegreeThird += 0.05;
+                var sRotateThird = "skewY(" + sDegreeThird + "deg)";
+                $("#third-angle").css({"transform" : sRotateThird, "-webkit-transform" : sRotateThird});
+
+            }
+        }
+        
+        function angleForth() {
+            if (sDegreeForth <= 3) {
+                sDegreeForth += 0.05;
+                var sRotateForth = "skewY(" + sDegreeForth + "deg)";
+                $("#forth-angle").css({"transform" : sRotateForth, "-webkit-transform" : sRotateForth});
+                console.log(sDegreeForth);
+            }
+        }
+        
+        
+        function KetchupParallaxHelper() {
+              
+          var Helper = this, //Сохраняем ссылку на косруктор
+              directionTop = false, // Сохраняем направление скрола;
+              directionBottom = true,
+              targets = []; 
+              _previousScroll = 0;
+              currentScroll = 0; 
+
+          $(window).on('scroll', function() {
+            Helper.currentScroll = $(this).scrollTop();
+            if( Helper.currentScroll > Helper._previousScroll) {
+              directionTop = false;
+              directionBottom = true;
+            }else {
+              directionTop = true;
+              directionBottom = false;
+            }
+            Helper.processHelper
+          });
+        }
+        
+        KetchupParallaxHelper.prototype.processHelper = function() {
+          var Helper = this;
+          (function() {
+            for(var i in Helper.targets) {
+              if(Helper.targets.hasOwnProperty(i)) {
+                if( Helper._currentScroll > i.startpoint && 
+                    Helper._currentScroll < i.endpoint) {
+                  i.callback();
+                }
+              } 
+            }
+          })();
+        }
+        
+        KetchupParallaxHelper.prototype.addParalax = function(callback, start, end) {
+          if (end === undefined) {
+            end = $(document).height();
+          }
+          this.targets.push({
+                             'callback': callback,
+                             'startpoint': start, 
+                             'endpoint': end});
+        }
+        //function effectSecond(){
+                //var sdegree = 0;
+                //var previosScroll = 0;
+                //$(window).scroll(function() {
+                //var direction = previosScroll - $(window).scrollTop();
+                    //previosScroll = $(window).scrollTop();
+                //(direction < 0) ? scrolledDown() : scrolledUp();
+                //function scrolledDown() { 
+                    //if (sdegree <= 6) {
+                        //sdegree += 0.1 ;
+                        //var srotate = "skewY(" + sdegree + "deg)";
+                        //$("#first-angle").css({"transform" : srotate, "-webkit-transform" : srotate});
+                    //}
+                //}
+                //function scrolledUp() { 
+                    //if (sdegree > 0) {
+                        //sdegree -= 0.1 ;
+                        //var srotate = "skewY(" + sdegree + "deg)";
+                        //console.log(sdegree);
+                        //$("#first-angle").css({"transform" : srotate, "-webkit-transform" : srotate});
+                    //}
+                //}
+            //});
+    //}
+        
+        $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+            event.preventDefault();
+            $(this).ekkoLightbox(
+                {
+                    loadingMessage:'Загрузка...',
+                    directional_arrows: true,
+                    always_show_close: true
+	           }
+            );
+        });
+        
+        
+});
+	
+})(jQuery, this);
+
+
